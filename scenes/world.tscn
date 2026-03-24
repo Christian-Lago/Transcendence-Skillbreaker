@@ -10,6 +10,6 @@
 shape = SubResource("WorldBoundaryShape2D_swnqp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-12.5, 0.25)
-scale = Vector2(217, 1.5)
+position = Vector2(-84, 12)
+scale = Vector2(1342, -24)
 texture = SubResource("PlaceholderTexture2D_fkwym")

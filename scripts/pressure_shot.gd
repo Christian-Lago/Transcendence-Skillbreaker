@@ -62,3 +62,12 @@ func _calc_damage(dist: float) -> float:
 	print("Daño / Damage: ", final_damage)
 
 	return final_damage
+	
+func _on_body_entered(body):
+		# Comprobar si el cuerpo es un enemigo
+	# Check if body is an enemy
+	if body.has_method("take_damage"):
+		var dist = global_position.distance_to(origin)
+		var damage = _calc_damage(dist)
+		body.take_damage(damage)
+		queue_free()
