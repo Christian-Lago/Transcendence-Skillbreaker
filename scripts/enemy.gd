@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # Nivel del enemigo
 # Enemy level
-var enemy_level = 30
+@export var enemy_level = 30
 
 # Vida del enemigo
 # Enemy health
@@ -19,10 +19,11 @@ var player = null
 # Tabla de modificadores por nivel
 # Level modifier table
 const LEVEL_MODIFIERS = [
-	[1,   50,  1.5, 0.6],
+	# [nivel_min, nivel_max, dmg_dado, dmg_recibido]
+	[1,   50,  0.6, 1.5],
 	[51,  89,  1.0, 1.0],
-	[90,  99,  0.8, 1.2],
-	[100, 999, 0.6, 1.5],
+	[90,  99,  1.2, 0.8],
+	[100, 999, 1.5, 0.6],
 ]
 
 func _ready():
@@ -51,12 +52,10 @@ func get_modifiers() -> Dictionary:
 	return {"dmg_out": 1.0, "dmg_in": 1.0}
 
 func take_damage(raw_damage: float):
-	# Aplicar modificador de daño recibido
-	# Apply damage received modifier
 	var mod = get_modifiers()
 	var final_damage = raw_damage * mod["dmg_in"]
 	health -= final_damage
-	print("Daño recibido / Damage received: ", final_damage, " | Vida / Health: ", health)
+	print("Nivel / Level: ", enemy_level, " | Modificador / Modifier: ", mod["dmg_in"], " | Daño / Damage: ", final_damage)
 	if health <= 0:
 		die()
 

@@ -159,6 +159,7 @@ func _use_ultimate():
 	for r in results:
 		var body = r["collider"]
 		if body.has_method("die"):
+			print("Ultimate mata enemigo nivel / Ultimate kills enemy level: ", body.enemy_level)
 			body.die()
 
 	print("Ultimate activado / Ultimate activated")
