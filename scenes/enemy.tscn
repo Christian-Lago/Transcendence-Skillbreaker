@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_dtlav"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y21w1"]
+radius = 14.0
+height = 50.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_t40w3"]
 
@@ -14,8 +16,8 @@ script = ExtResource("1_dtlav")
 shape = SubResource("CapsuleShape2D_y21w1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-0.5, 3.57628e-07)
-scale = Vector2(13, 26)
+position = Vector2(-0.500001, 2.38419e-07)
+scale = Vector2(19, 42)
 texture = SubResource("PlaceholderTexture2D_t40w3")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

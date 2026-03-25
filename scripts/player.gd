@@ -36,7 +36,7 @@ const ENERGY_MAX      = 100.0
 
 # Coste del ultimate
 # Ultimate cost
-const ENERGY_COST     = 80.0
+const ENERGY_COST     = 0.0
 
 # Regeneración de energía por segundo
 # Energy regen per second
@@ -48,15 +48,15 @@ const ENERGY_PER_KILL = 10.0
 
 # Radio del ultimate
 # Ultimate radius
-const ULT_RADIUS      = 300.0
+const ULT_RADIUS      = 500.0
 
 # Cooldown del ultimate
 # Ultimate cooldown
-const ULT_COOLDOWN    = 2.0
+const ULT_COOLDOWN    = 0.0
 
 # Energía actual
 # Current energy
-var energy              = 50.0
+var energy              = 100.0
 
 # Temporizador del cooldown
 # Cooldown timer
@@ -138,13 +138,13 @@ func _fire_pressure_shot():
 func _use_ultimate():
 	# Comprobar si hay suficiente energía y cooldown
 	# Check if enough energy and cooldown
-	if energy < ENERGY_COST or ult_cooldown_timer > 0:
+	if energy < ENERGY_COST:
 		return
 
 	# Gastar energía y activar cooldown
 	# Spend energy and activate cooldown
 	energy -= ENERGY_COST
-	ult_cooldown_timer = ULT_COOLDOWN
+	#ult_cooldown_timer = ULT_COOLDOWN
 
 	# Detectar enemigos en radio y matarlos
 	# Detect enemies in radius and kill them
@@ -158,8 +158,18 @@ func _use_ultimate():
 	var results = space.intersect_shape(query)
 	for r in results:
 		var body = r["collider"]
-		if body.has_method("die"):
-			print("Ultimate mata enemigo nivel / Ultimate kills enemy level: ", body.enemy_level)
-			body.die()
+		if body.has_method("take_damage"):
+			var diff = body.enemy_level - 90
+			if diff <= -10:
+				# Enemigo 10+ niveles por debajo, muerte instantánea
+				# Enemy 10+ levels below, instant kill
+				print("Ultimate: muerte instantánea a nivel / instant kill level: ", body.enemy_level)
+				body.die()
+			else:
+				# Enemigo cercano en nivel, solo daño
+				# Enemy close in level, damage only
+				var damage = 80.0
+				print("Ultimate: daño a nivel / damage to level: ", body.enemy_level, " | Daño / Damage: ", damage)
+				body.take_damage(damage)
 
 	print("Ultimate activado / Ultimate activated")

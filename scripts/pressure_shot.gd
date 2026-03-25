@@ -37,6 +37,12 @@ func setup(dir, charge, spd, d_min, d_max, f_start, f_end):
 	falloff_start = f_start
 	falloff_end   = f_end
 	origin        = global_position
+	# Escalar el proyectil según la carga
+	# Scale projectile based on charge
+	var min_scale = 1.0
+	var max_scale = 2.0
+	var final_scale = lerp(min_scale, max_scale, charge_pct)
+	scale = Vector2(final_scale, final_scale)
 
 func _physics_process(delta):
 	# Mover el proyectil
