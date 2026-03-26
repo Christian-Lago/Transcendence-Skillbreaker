@@ -7,54 +7,18 @@
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_p61yh")]
-position = Vector2(-67, -59)
+position = Vector2(524, -47)
 
 [node name="World" parent="." instance=ExtResource("2_uotr0")]
 
-[node name="Enemy" parent="." instance=ExtResource("3_gsu4p")]
-position = Vector2(403, -65)
-enemy_level = 80
-
-[node name="Enemy2" parent="." instance=ExtResource("3_gsu4p")]
-position = Vector2(-499, -186)
-enemy_level = 80
-
-[node name="Enemy3" parent="." instance=ExtResource("3_gsu4p")]
-position = Vector2(168, -354)
-enemy_level = 80
-
-[node name="Enemy4" parent="." instance=ExtResource("3_gsu4p")]
-position = Vector2(-379, -236)
-enemy_level = 80
-
-[node name="Enemy9" parent="." instance=ExtResource("3_gsu4p")]
-position = Vector2(-438, -111)
-enemy_level = 80
-
-[node name="Enemy10" parent="." instance=ExtResource("3_gsu4p")]
-position = Vector2(-363, -160)
-enemy_level = 80
-
-[node name="Enemy11" parent="." instance=ExtResource("3_gsu4p")]
-position = Vector2(100, -378)
-enemy_level = 80
-
 [node name="Enemy12" parent="." instance=ExtResource("3_gsu4p")]
-position = Vector2(3, -372)
-enemy_level = 80
-
-[node name="Enemy5" parent="." instance=ExtResource("3_gsu4p")]
-position = Vector2(255, -209)
-enemy_level = 80
-
-[node name="Enemy8" parent="." instance=ExtResource("3_gsu4p")]
-position = Vector2(246, -282)
+position = Vector2(86, -719)
 enemy_level = 80
 
 [node name="Enemy6" parent="." instance=ExtResource("3_gsu4p")]
-position = Vector2(-132, -351)
+position = Vector2(-1012, -490)
 enemy_level = 80
 
 [node name="Enemy7" parent="." instance=ExtResource("3_gsu4p")]
-position = Vector2(-238, -344)
+position = Vector2(-921, -347)
 enemy_level = 80

@@ -31,7 +31,7 @@ func _ready():
 	# Find player in scene
 	player = get_tree().get_first_node_in_group("player")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Si no hay jugador no hacer nada
 	# If no player do nothing
 	if player == null:
