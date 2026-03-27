@@ -142,3 +142,20 @@ func _use_ultimate():
 				print("Ultimate: daño a nivel / damage to level: ", body.enemy_level, " | Daño / Damage: ", damage)
 				body.take_damage(damage)
 	print("Ultimate activado / Ultimate activated")
+	# Temblar pantalla al usar ultimate
+	# Screen shake on ultimate
+	_screen_shake(0.3, 15.0)
+	
+func _screen_shake(duration: float, strength: float):
+	# Temblar la cámara
+	# Shake the camera
+	var camera = get_node("Camera2D")
+	var timer = 0.0
+	while timer < duration:
+		camera.offset = Vector2(
+			randf_range(-strength, strength),
+			randf_range(-strength, strength)
+		)
+		timer += get_process_delta_time()
+		await get_tree().process_frame
+	camera.offset = Vector2.ZERO
