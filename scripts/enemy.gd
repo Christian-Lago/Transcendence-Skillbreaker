@@ -63,4 +63,11 @@ func die():
 	# Morir
 	# Die
 	print("Enemigo muerto / Enemy dead")
+	
+	# Generar portal al morir
+	# Spawn portal on death
+	var portal = preload("res://scenes/portal.tscn").instantiate()
+	portal.global_position = global_position
+	get_parent().add_child(portal)
+	
 	queue_free()
