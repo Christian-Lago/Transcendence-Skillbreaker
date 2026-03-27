@@ -110,6 +110,12 @@ func _on_body_entered(body):
 		var dist = global_position.distance_to(origin)
 		var damage = _calc_damage(dist)
 		body.take_damage(damage)
+
+		# Registrar kill si el enemigo muere
+		# Register kill if enemy dies
+		if body.health <= 0:
+			SkillManager.register_kill("pressure")
+
 		queue_free()
 
 func _calc_damage(dist: float) -> float:
