@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4mjwkaia20n5"]
+
+[ext_resource type="PackedScene" uid="uid://driysp47g8eys" path="res://scenes/player.tscn" id="1_hiwp5"]
+[ext_resource type="PackedScene" uid="uid://did2vvyg7ulp1" path="res://scenes/enemy_ranged.tscn" id="2_8fkwd"]
+[ext_resource type="PackedScene" uid="uid://d1lrvo0ktfcqu" path="res://scenes/hud.tscn" id="3_ughon"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0idq1"]
+size = Vector2(443, 12)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_hdmrk"]
+
+[node name="primerMundo" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-18, 38)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(58.5, 13)
+shape = SubResource("RectangleShape2D_0idq1")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(58, 12.625)
+scale = Vector2(440, 13.25)
+texture = SubResource("PlaceholderTexture2D_hdmrk")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(167, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(169.5, 8.5)
+shape = SubResource("RectangleShape2D_0idq1")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+position = Vector2(167.5, 8.5)
+scale = Vector2(449, 13)
+texture = SubResource("PlaceholderTexture2D_hdmrk")
+
+[node name="Player" parent="." instance=ExtResource("1_hiwp5")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_8fkwd")]
+position = Vector2(431, -203)
+enemy_level = 90
+
+[node name="CanvasLayer" parent="." instance=ExtResource("3_ughon")]

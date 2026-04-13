@@ -40,9 +40,16 @@ const ULT_RADIUS = 500.0
 # Cooldown del ultimate
 # Ultimate cooldown
 const ULT_COOLDOWN = 0.0
+
+const HEALTH_MAX = 100.0
+
+
 # Energía actual
 # Current energy
 var energy = 100.0
+
+
+var health = 100.0
 # Temporizador del cooldown
 # Cooldown timer
 var ult_cooldown_timer = 0.0
@@ -52,6 +59,10 @@ var charge_timer = 0.0
 # Si está cargando
 # If charging
 var is_charging = false
+
+signal health_changed(current: float, maximum: float)
+signal energy_changed(current: float, maximum: float)
+signal player_died
 
 func _physics_process(delta):
 	# Gravedad
@@ -92,6 +103,7 @@ func _physics_process(delta):
 		_fire_pressure_shot()
 		is_charging = false
 		
+	emit_signal("energy_changed", energy, ENERGY_MAX)
 	move_and_slide()
 
 func _fire_pressure_shot():
@@ -159,3 +171,12 @@ func _screen_shake(duration: float, strength: float):
 		timer += get_process_delta_time()
 		await get_tree().process_frame
 	camera.offset = Vector2.ZERO
+
+func take_damage(damage: float):
+	# Aplicar daño y emitir señal al HUD
+	# Apply damage and emit signal to HUD
+	health = max(0.0, health - damage)
+	emit_signal("health_changed", health, HEALTH_MAX)
+	if health <= 0:
+		emit_signal("player_died")
+		print("Jugador muerto / Player dead")

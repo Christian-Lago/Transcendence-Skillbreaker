@@ -3,15 +3,15 @@ extends CharacterBody2D
 # Nivel del enemigo
 # Enemy level
 @export var enemy_level = 30
-
 # Vida del enemigo
 # Enemy health
 var health = 100.0
-
 # Velocidad del enemigo
 # Enemy speed
 const SPEED = 150.0
-
+# Temporizador de parpadeo de daño
+# Damage blink timer
+var blink_timer: float = 0.0
 # Referencia al jugador
 # Player reference
 var player = null
@@ -31,12 +31,15 @@ func _ready():
 	# Find player in scene
 	player = get_tree().get_first_node_in_group("player")
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	# Si no hay jugador no hacer nada
 	# If no player do nothing
 	if player == null:
 		return
-
+	# Gestionar parpadeo de daño
+	# Handle damage blink
+	if blink_timer > 0:
+		blink_timer -= delta
 	# Moverse hacia el jugador
 	# Move towards player
 	var dir = (player.global_position - global_position).normalized()
@@ -55,19 +58,13 @@ func take_damage(raw_damage: float):
 	var mod = get_modifiers()
 	var final_damage = raw_damage * mod["dmg_in"]
 	health -= final_damage
+	blink_timer = 0.3
 	print("Nivel / Level: ", enemy_level, " | Modificador / Modifier: ", mod["dmg_in"], " | Daño / Damage: ", final_damage)
 	if health <= 0:
 		die()
 
 func die():
-	# Morir
-	# Die
-	print("Enemigo muerto / Enemy dead")
-	
-	# Generar portal al morir
-	# Spawn portal on death
-	var portal = preload("res://scenes/portal.tscn").instantiate()
-	portal.global_position = global_position
-	get_parent().add_child(portal)
-	
+	# Morir — los portales son fijos en el escenario, no se generan aquí
+	# Die — portals are fixed in the scene, not spawned here
+	print("Arrastrado muerto / Crawler dead")
 	queue_free()

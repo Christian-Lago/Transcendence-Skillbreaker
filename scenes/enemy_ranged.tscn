@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://did2vvyg7ulp1"]
+
+[ext_resource type="Script" path="res://scripts/enemy_ranged.gd" id="1_y2d7d"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p2nbb"]
+radius = 97.0
+height = 362.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_nkpla"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
+script = ExtResource("1_y2d7d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_p2nbb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.999995, -2.50001)
+scale = Vector2(140, 301)
+texture = SubResource("PlaceholderTexture2D_nkpla")

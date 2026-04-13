@@ -25,5 +25,5 @@ position = Vector2(-921, -347)
 enemy_level = 80
 
 [node name="Portal" parent="." instance=ExtResource("4_p5gwb")]
-position = Vector2(-281, -27)
-next_scene = "res://scenes/universe_1.tscn"
+position = Vector2(0, -23)
+next_scene = "res://scenes/primer_mundo.tscn"
