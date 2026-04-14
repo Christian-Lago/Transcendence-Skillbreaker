@@ -25,6 +25,9 @@ const PROJ_SPEED = 900.0
 # Energía máxima
 # Max energy
 const ENERGY_MAX = 100.0
+# Vida máxima
+# Max health
+const HEALTH_MAX = 100.0
 # Coste del ultimate
 # Ultimate cost
 const ENERGY_COST = 0.0
@@ -41,14 +44,11 @@ const ULT_RADIUS = 500.0
 # Ultimate cooldown
 const ULT_COOLDOWN = 0.0
 
-const HEALTH_MAX = 100.0
-
-
 # Energía actual
 # Current energy
 var energy = 100.0
-
-
+# Vida actual
+# Current health
 var health = 100.0
 # Temporizador del cooldown
 # Cooldown timer
@@ -69,9 +69,12 @@ func _physics_process(delta):
 	# Gravity
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
-	# Regenerar energía con el tiempo
-	# Regenerate energy over time
+	# Regenerar energía con el tiempo, emitir señal solo si cambia
+	# Regenerate energy over time, emit signal only if it changes
+	var prev_energy = energy
 	energy = min(ENERGY_MAX, energy + ENERGY_REGEN * delta)
+	if energy != prev_energy:
+		emit_signal("energy_changed", energy, ENERGY_MAX)
 	# Reducir cooldown del ultimate
 	# Reduce ultimate cooldown
 	if ult_cooldown_timer > 0:
@@ -102,11 +105,11 @@ func _physics_process(delta):
 	if Input.is_action_just_released("Attack"):
 		_fire_pressure_shot()
 		is_charging = false
-		
-	emit_signal("energy_changed", energy, ENERGY_MAX)
+
 	move_and_slide()
 
 func _fire_pressure_shot():
+	print("Disparando / Firing")  # ← añade esta línea
 	# Calcular dirección hacia el ratón
 	# Calculate direction towards mouse
 	var aim_direction = (get_global_mouse_position() - global_position).normalized()
@@ -119,15 +122,16 @@ func _fire_pressure_shot():
 	proj.global_position = global_position
 	proj.setup(aim_direction, charge_pct, PROJ_SPEED, DMG_MIN, DMG_MAX, FALLOFF_START, FALLOFF_END)
 	get_parent().add_child(proj)
-	
+
 func _use_ultimate():
 	# Comprobar si hay suficiente energía y cooldown
 	# Check if enough energy and cooldown
 	if energy < ENERGY_COST:
 		return
-	# Gastar energía y activar cooldown
-	# Spend energy and activate cooldown
+	# Gastar energía y emitir señal
+	# Spend energy and emit signal
 	energy -= ENERGY_COST
+	emit_signal("energy_changed", energy, ENERGY_MAX)
 	# Detectar enemigos en radio y matarlos
 	# Detect enemies in radius and kill them
 	var space = get_world_2d().direct_space_state
@@ -143,21 +147,26 @@ func _use_ultimate():
 		if body.has_method("take_damage"):
 			var diff = body.enemy_level - 90
 			if diff <= -10:
-				# Enemigo 10+ niveles por debajo, muerte instantánea
-				# Enemy 10+ levels below, instant kill
 				print("Ultimate: muerte instantánea a nivel / instant kill level: ", body.enemy_level)
 				body.die()
 			else:
-				# Enemigo cercano en nivel, solo daño
-				# Enemy close in level, damage only
 				var damage = 80.0
 				print("Ultimate: daño a nivel / damage to level: ", body.enemy_level, " | Daño / Damage: ", damage)
 				body.take_damage(damage)
 	print("Ultimate activado / Ultimate activated")
-	# Temblar pantalla al usar ultimate
-	# Screen shake on ultimate
 	_screen_shake(0.3, 15.0)
-	
+
+func take_damage(damage: float):
+	health = max(0.0, health - damage)
+	emit_signal("health_changed", health, HEALTH_MAX)
+	if health <= 0:
+		emit_signal("player_died")
+		print("Jugador muerto / Player dead")
+		# Instanciar game over
+		# Instantiate game over
+		var game_over = preload("res://scenes/game_over.tscn").instantiate()
+		get_tree().root.add_child(game_over)
+
 func _screen_shake(duration: float, strength: float):
 	# Temblar la cámara
 	# Shake the camera
@@ -171,12 +180,3 @@ func _screen_shake(duration: float, strength: float):
 		timer += get_process_delta_time()
 		await get_tree().process_frame
 	camera.offset = Vector2.ZERO
-
-func take_damage(damage: float):
-	# Aplicar daño y emitir señal al HUD
-	# Apply damage and emit signal to HUD
-	health = max(0.0, health - damage)
-	emit_signal("health_changed", health, HEALTH_MAX)
-	if health <= 0:
-		emit_signal("player_died")
-		print("Jugador muerto / Player dead")
