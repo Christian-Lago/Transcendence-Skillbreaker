@@ -39,6 +39,6 @@ texture = SubResource("PlaceholderTexture2D_hdmrk")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_8fkwd")]
 position = Vector2(431, -203)
-enemy_level = 90
+enemy_level = 140
 
 [node name="CanvasLayer" parent="." instance=ExtResource("3_ughon")]

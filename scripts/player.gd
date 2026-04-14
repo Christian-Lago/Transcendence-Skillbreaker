@@ -165,7 +165,7 @@ func take_damage(damage: float):
 		# Instanciar game over
 		# Instantiate game over
 		var game_over = preload("res://scenes/game_over.tscn").instantiate()
-		get_tree().root.add_child(game_over)
+		get_parent().add_child(game_over)
 
 func _screen_shake(duration: float, strength: float):
 	# Temblar la cámara

@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var menu_button = $VBoxContainer/MenuButton
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	# Conectar botones
 	# Connect buttons
 	retry_button.pressed.connect(_on_retry_pressed)
@@ -15,13 +16,17 @@ func _ready():
 	get_tree().paused = true
 
 func _on_retry_pressed():
-	# Reanudar y recargar la escena actual
-	# Unpause and reload current scene
+	# Desconectar botones para evitar pulsaciones múltiples
+	# Disconnect buttons to avoid multiple presses
+	retry_button.pressed.disconnect(_on_retry_pressed)
+	menu_button.pressed.disconnect(_on_menu_pressed)
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 
 func _on_menu_pressed():
-	# Reanudar e ir al menú principal
-	# Unpause and go to main menu
+	# Desconectar botones para evitar pulsaciones múltiples
+	# Disconnect buttons to avoid multiple presses
+	retry_button.pressed.disconnect(_on_retry_pressed)
+	menu_button.pressed.disconnect(_on_menu_pressed)
 	get_tree().paused = false
 	get_tree().call_deferred("change_scene_to_file", "res://scenes/main.tscn")
