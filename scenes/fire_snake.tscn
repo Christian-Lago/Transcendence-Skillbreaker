@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6pdlo5i8hkx3"]
+
+[ext_resource type="Script" path="res://scripts/fire_snake.gd" id="1_xtorj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xex0c"]
+size = Vector2(826, 20)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 8
+script = ExtResource("1_xtorj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xex0c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
