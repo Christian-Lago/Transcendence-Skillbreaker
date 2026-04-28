@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://dslbvicgtm5pq"]
+
+[ext_resource type="Script" path="res://scripts/skill_steal.gd" id="1_i3ngt"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_i3ngt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 278.0
+offset_bottom = 138.0
+
+[node name="TitleLabel" type="Label" parent="."]
+offset_left = 76.0
+offset_top = 26.0
+offset_right = 213.0
+offset_bottom = 49.0
+text = "¿Robar habilidad?"
+
+[node name="SkillLabel" type="Label" parent="."]
+offset_left = 74.0
+offset_top = 55.0
+offset_right = 223.0
+offset_bottom = 78.0
+text = "Serpiente de Fuego"
+
+[node name="YesButton" type="Button" parent="."]
+offset_left = 98.0
+offset_top = 87.0
+offset_right = 128.0
+offset_bottom = 118.0
+text = "Si"
+
+[node name="NoButton" type="Button" parent="."]
+offset_left = 151.0
+offset_top = 87.0
+offset_right = 185.0
+offset_bottom = 118.0
+text = "NO"

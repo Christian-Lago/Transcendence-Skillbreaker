@@ -168,11 +168,13 @@ func take_damage(damage: float):
 		get_parent().add_child(game_over)
 
 func _screen_shake(duration: float, strength: float):
-	# Temblar la cámara
-	# Shake the camera
 	var camera = get_node("Camera2D")
 	var timer = 0.0
 	while timer < duration:
+		# Comprobar que el nodo sigue en escena
+		# Check node is still in scene
+		if not is_inside_tree():
+			return
 		camera.offset = Vector2(
 			randf_range(-strength, strength),
 			randf_range(-strength, strength)

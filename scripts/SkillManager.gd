@@ -15,6 +15,12 @@ var skills = {
 		"progress": 0,
 		"goal": 20
 	},
+	"fire_snake": {
+		"unlocked": false,
+		"condition": "steal_from_boss",
+		"progress": 0,
+		"goal": 1
+	},
 }
 
 func register_kill(type: String):

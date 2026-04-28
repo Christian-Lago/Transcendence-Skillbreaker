@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4mjwkaia20n5"]
+[gd_scene load_steps=8 format=3 uid="uid://c4mjwkaia20n5"]
 
 [ext_resource type="PackedScene" uid="uid://driysp47g8eys" path="res://scenes/player.tscn" id="1_hiwp5"]
 [ext_resource type="PackedScene" uid="uid://did2vvyg7ulp1" path="res://scenes/enemy_ranged.tscn" id="2_8fkwd"]
 [ext_resource type="PackedScene" uid="uid://d1lrvo0ktfcqu" path="res://scenes/hud.tscn" id="3_ughon"]
 [ext_resource type="PackedScene" uid="uid://cr4somrextqee" path="res://scenes/enemy_erratic.tscn" id="4_lkden"]
+[ext_resource type="PackedScene" uid="uid://nhs8boakv3ix" path="res://scenes/boss.tscn" id="5_rbka7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0idq1"]
 size = Vector2(1865, 17)
@@ -48,3 +49,6 @@ enemy_level = 140
 [node name="CharacterBody2D2" parent="." instance=ExtResource("4_lkden")]
 position = Vector2(-778, -60)
 enemy_level = 100
+
+[node name="CharacterBody2D3" parent="." instance=ExtResource("5_rbka7")]
+position = Vector2(-215, -89)

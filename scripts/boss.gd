@@ -183,9 +183,11 @@ func take_damage(raw_damage: float):
 
 func die():
 	print("Jefe muerto / Boss dead")
-	# 25% de probabilidad de soltar habilidad
-	# 25% chance to drop skill
+	# 25% de probabilidad de soltar orbe de habilidad
+	# 25% chance to drop skill orb
 	if randf() <= 0.25:
-		print("Habilidad disponible para robar / Skill available to steal: fire_snake")
-		# TODO: implementar pantalla de robo de habilidad
+		var orb = preload("res://scenes/skill_orb.tscn").instantiate()
+		orb.global_position = global_position
+		get_parent().add_child(orb)
+		print("Orbe de habilidad soltado / Skill orb dropped")
 	queue_free()

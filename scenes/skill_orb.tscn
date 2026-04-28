@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://rkvhblv8odgk"]
+
+[ext_resource type="Script" path="res://scripts/skill_orb.gd" id="1_7t43f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gfe8v"]
+radius = 73.7835
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5by2i"]
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 16
+script = ExtResource("1_7t43f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gfe8v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2.98023e-08, 0)
+scale = Vector2(97, 100)
+texture = SubResource("PlaceholderTexture2D_5by2i")
