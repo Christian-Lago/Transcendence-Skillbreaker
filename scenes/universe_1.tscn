@@ -1,25 +1,40 @@
 [gd_scene load_steps=4 format=3 uid="uid://51r5m3q3e5gp"]
 
 [ext_resource type="PackedScene" uid="uid://driysp47g8eys" path="res://scenes/player.tscn" id="1_p61yh"]
-[ext_resource type="PackedScene" uid="uid://dhap6kn7r1mde" path="res://scenes/world.tscn" id="2_uotr0"]
-[ext_resource type="PackedScene" uid="uid://b64qgq42qls3" path="res://scenes/enemy.tscn" id="3_gsu4p"]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_12p4i"]
+size = Vector2(63, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e7oti"]
+size = Vector2(40, 40)
+
+[node name="universe_1" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_p61yh")]
-position = Vector2(524, -47)
+position = Vector2(-4, -1315)
 
-[node name="Enemy12" parent="." instance=ExtResource("3_gsu4p")]
-position = Vector2(86, -719)
-enemy_level = 80
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+metadata/_edit_group_ = true
 
-[node name="Enemy6" parent="." instance=ExtResource("3_gsu4p")]
-position = Vector2(-1012, -490)
-enemy_level = 80
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(21.5, 0.5)
+shape = SubResource("RectangleShape2D_12p4i")
 
-[node name="Enemy7" parent="." instance=ExtResource("3_gsu4p")]
-position = Vector2(-921, -347)
-enemy_level = 80
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 
-[node name="World" parent="." instance=ExtResource("2_uotr0")]
-position = Vector2(452, 106)
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(-312, -301)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_e7oti")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D2"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0

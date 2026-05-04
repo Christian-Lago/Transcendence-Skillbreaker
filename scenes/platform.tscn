@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccoty288lsjbr"]
+
+[ext_resource type="Script" path="res://scripts/platform.gd" id="1_fe2i8"]
+[ext_resource type="PackedScene" uid="uid://driysp47g8eys" path="res://scenes/player.tscn" id="1_rokgq"]
+[ext_resource type="PackedScene" uid="uid://b64qgq42qls3" path="res://scenes/enemy.tscn" id="2_kdril"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oak0k"]
+size = Vector2(838, 40)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_fe2i8")
+
+[node name="bloque" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bloque"]
+shape = SubResource("RectangleShape2D_oak0k")
+
+[node name="ColorRect" type="ColorRect" parent="bloque"]
+offset_left = -420.0
+offset_top = -22.0
+offset_right = 419.0
+offset_bottom = 18.0
+
+[node name="Player" parent="." instance=ExtResource("1_rokgq")]
+position = Vector2(-1, -72)
+
+[node name="Enemy" parent="." instance=ExtResource("2_kdril")]
+position = Vector2(-469, -224)
+enemy_level = 80
+
+[node name="Enemy2" parent="." instance=ExtResource("2_kdril")]
+position = Vector2(-380, -317)
+enemy_level = 80
+
+[node name="Enemy3" parent="." instance=ExtResource("2_kdril")]
+position = Vector2(-270, -400)
+enemy_level = 80
+
+[node name="Enemy4" parent="." instance=ExtResource("2_kdril")]
+position = Vector2(-134, -437)
+enemy_level = 80
+
+[node name="Enemy5" parent="." instance=ExtResource("2_kdril")]
+position = Vector2(0, -448)
+enemy_level = 80
+
+[node name="Enemy6" parent="." instance=ExtResource("2_kdril")]
+position = Vector2(144, -434)
+enemy_level = 80
+
+[node name="Enemy7" parent="." instance=ExtResource("2_kdril")]
+position = Vector2(249, -388)
+enemy_level = 80
+
+[node name="Enemy8" parent="." instance=ExtResource("2_kdril")]
+position = Vector2(339, -339)
+enemy_level = 80
+
+[node name="Enemy9" parent="." instance=ExtResource("2_kdril")]
+position = Vector2(417, -263)
+enemy_level = 80
