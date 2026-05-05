@@ -9,6 +9,7 @@ radius = 102.044
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
+collision_mask = 16
 script = ExtResource("1_cach1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

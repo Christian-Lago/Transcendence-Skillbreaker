@@ -104,18 +104,16 @@ func _physics_process(delta):
 		queue_free()
 
 func _on_body_entered(body):
-	# Comprobar si el cuerpo es un enemigo
-	# Check if body is an enemy
+	# Comprobar si el cuerpo tiene take_damage
+	# Check if body has take_damage
 	if body.has_method("take_damage"):
 		var dist = global_position.distance_to(origin)
 		var damage = _calc_damage(dist)
 		body.take_damage(damage)
-
-		# Registrar kill si el enemigo muere
-		# Register kill if enemy dies
-		if body.health <= 0:
+		# Registrar kill solo si es enemigo
+		# Register kill only if enemy
+		if body.is_in_group("enemy") and body.health <= 0:
 			SkillManager.register_kill("pressure")
-
 		queue_free()
 
 func _calc_damage(dist: float) -> float:
